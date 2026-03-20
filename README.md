@@ -35,20 +35,19 @@ flutter pub get
 In Supabase Dashboard:
 1. Go to Authentication -> Providers
 2. Enable Email provider
-3. Copy:
-   - Project URL
-   - Project API anon key
+
+This project is currently configured with Supabase URL and anon key directly in `lib/main.dart`.
 
 ## 5) Run locally (web)
 
 ```bash
-flutter run -d chrome --dart-define=SUPABASE_URL=YOUR_SUPABASE_URL --dart-define=SUPABASE_ANON_KEY=YOUR_SUPABASE_ANON_KEY
+flutter run -d chrome
 ```
 
 ## 6) Build web for production
 
 ```bash
-flutter build web --release --dart-define=SUPABASE_URL=YOUR_SUPABASE_URL --dart-define=SUPABASE_ANON_KEY=YOUR_SUPABASE_ANON_KEY
+flutter build web --release
 ```
 
 The build output is created in `build/web`.
