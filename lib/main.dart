@@ -6,11 +6,18 @@ import 'screens/login_screen.dart';
 import 'screens/register_screen.dart';
 import 'services/auth_service.dart';
 
-const String supabaseUrl = 'https://ctacspknjtxvkfsirxbf.supabase.co';
-const String supabaseAnonKey = 'sb_publishable_vJcfepRUD2nKpsOFhqP-Bg_5zEeYzgo';
+const String supabaseUrl = String.fromEnvironment('SUPABASE_URL');
+const String supabaseAnonKey = String.fromEnvironment('SUPABASE_ANON_KEY');
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  if (supabaseUrl.isEmpty || supabaseAnonKey.isEmpty) {
+    throw Exception(
+      'Missing Supabase env values. Run with --dart-define=SUPABASE_URL=... '
+      'and --dart-define=SUPABASE_ANON_KEY=...',
+    );
+  }
 
   await Supabase.initialize(url: supabaseUrl, anonKey: supabaseAnonKey);
 

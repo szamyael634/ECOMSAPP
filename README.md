@@ -35,19 +35,22 @@ flutter pub get
 In Supabase Dashboard:
 1. Go to Authentication -> Providers
 2. Enable Email provider
+3. Copy:
+	- Project URL
+	- Project API anon key
 
-This project is currently configured with Supabase URL and anon key directly in `lib/main.dart`.
+This app reads Supabase values from Dart defines in `lib/main.dart`.
 
 ## 5) Run locally (web)
 
 ```bash
-flutter run -d chrome
+flutter run -d chrome --dart-define=SUPABASE_URL=YOUR_SUPABASE_URL --dart-define=SUPABASE_ANON_KEY=YOUR_SUPABASE_ANON_KEY
 ```
 
 ## 6) Build web for production
 
 ```bash
-flutter build web --release
+flutter build web --release --dart-define=SUPABASE_URL=YOUR_SUPABASE_URL --dart-define=SUPABASE_ANON_KEY=YOUR_SUPABASE_ANON_KEY
 ```
 
 The build output is created in `build/web`.
@@ -67,6 +70,12 @@ For production:
 ```bash
 vercel deploy --prebuilt --prod
 ```
+
+For Vercel project settings, add environment variables:
+- `SUPABASE_URL`
+- `SUPABASE_ANON_KEY`
+
+Then build with these values in CI before running `vercel deploy --prebuilt`.
 
 If you prefer, you can also deploy by importing this repo in Vercel and setting output directory to `build/web` after building in CI.
 
