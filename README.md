@@ -79,6 +79,28 @@ Then build with these values in CI before running `vercel deploy --prebuilt`.
 
 If you prefer, you can also deploy by importing this repo in Vercel and setting output directory to `build/web` after building in CI.
 
+## 8) Auto deploy with GitHub Actions
+
+This repo includes workflow `deploy-vercel.yml` at `.github/workflows/deploy-vercel.yml`.
+
+It will:
+- run on every push to `main`
+- build Flutter web with Supabase defines
+- deploy to Vercel production using prebuilt output
+
+Add these GitHub repository secrets in Settings -> Secrets and variables -> Actions:
+- `SUPABASE_URL`
+- `SUPABASE_ANON_KEY`
+- `VERCEL_TOKEN`
+- `VERCEL_ORG_ID`
+- `VERCEL_PROJECT_ID`
+
+How to get Vercel values:
+1. Run `vercel login`
+2. Run `vercel link` in this project once
+3. Get `VERCEL_ORG_ID` and `VERCEL_PROJECT_ID` from `.vercel/project.json`
+4. Create `VERCEL_TOKEN` from Vercel Account Settings -> Tokens
+
 ## App flow
 
 - `lib/screens/login_screen.dart`: user login via Supabase
