@@ -7,19 +7,25 @@ import 'screens/register_screen.dart';
 import 'services/auth_service.dart';
 
 const String supabaseUrl = String.fromEnvironment('SUPABASE_URL');
+const String supabasePublishableKey = String.fromEnvironment('SUPABASE_PUBLISHABLE_KEY');
 const String supabaseAnonKey = String.fromEnvironment('SUPABASE_ANON_KEY');
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  if (supabaseUrl.isEmpty || supabaseAnonKey.isEmpty) {
+  final authKey = supabasePublishableKey.isNotEmpty
+      ? supabasePublishableKey
+      : supabaseAnonKey;
+
+  if (supabaseUrl.isEmpty || authKey.isEmpty) {
     throw Exception(
       'Missing Supabase env values. Run with --dart-define=SUPABASE_URL=... '
-      'and --dart-define=SUPABASE_ANON_KEY=...',
+      'and --dart-define=SUPABASE_PUBLISHABLE_KEY=... '
+      '(or --dart-define=SUPABASE_ANON_KEY=... for backward compatibility).',
     );
   }
 
-  await Supabase.initialize(url: supabaseUrl, anonKey: supabaseAnonKey);
+  await Supabase.initialize(url: supabaseUrl, anonKey: authKey);
 
   runApp(const MyApp());
 }

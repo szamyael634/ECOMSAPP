@@ -37,20 +37,21 @@ In Supabase Dashboard:
 2. Enable Email provider
 3. Copy:
 	- Project URL
-	- Project API anon key
+	- Project API publishable key
+	- (Optional fallback) Project API anon key
 
 This app reads Supabase values from Dart defines in `lib/main.dart`.
 
 ## 5) Run locally (web)
 
 ```bash
-flutter run -d chrome --dart-define=SUPABASE_URL=YOUR_SUPABASE_URL --dart-define=SUPABASE_ANON_KEY=YOUR_SUPABASE_ANON_KEY
+flutter run -d chrome --dart-define=SUPABASE_URL=YOUR_SUPABASE_URL --dart-define=SUPABASE_PUBLISHABLE_KEY=YOUR_SUPABASE_PUBLISHABLE_KEY
 ```
 
 ## 6) Build web for production
 
 ```bash
-flutter build web --release --dart-define=SUPABASE_URL=YOUR_SUPABASE_URL --dart-define=SUPABASE_ANON_KEY=YOUR_SUPABASE_ANON_KEY
+flutter build web --release --dart-define=SUPABASE_URL=YOUR_SUPABASE_URL --dart-define=SUPABASE_PUBLISHABLE_KEY=YOUR_SUPABASE_PUBLISHABLE_KEY
 ```
 
 The build output is created in `build/web`.
@@ -73,6 +74,9 @@ vercel deploy --prebuilt --prod
 
 For Vercel project settings, add environment variables:
 - `SUPABASE_URL`
+- `SUPABASE_PUBLISHABLE_KEY`
+
+Optional backward-compatible variable:
 - `SUPABASE_ANON_KEY`
 
 Then build with these values in CI before running `vercel deploy --prebuilt`.
@@ -90,7 +94,8 @@ It will:
 
 Add these GitHub repository secrets in Settings -> Secrets and variables -> Actions:
 - `SUPABASE_URL`
-- `SUPABASE_ANON_KEY`
+- `SUPABASE_PUBLISHABLE_KEY`
+- `SUPABASE_ANON_KEY` (optional fallback)
 - `VERCEL_TOKEN`
 - `VERCEL_ORG_ID`
 - `VERCEL_PROJECT_ID`
