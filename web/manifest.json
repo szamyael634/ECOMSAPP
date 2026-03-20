@@ -1,0 +1,12 @@
+{
+  "name": "ECOMS App",
+  "short_name": "ECOMS",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0E7A6D",
+  "description": "ECOMS app built with Flutter and Supabase",
+  "orientation": "portrait-primary",
+  "prefer_related_applications": false,
+  "icons": []
+}
